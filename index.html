@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  
+  <link rel="stylesheet" href="styles.css" />
+  <title>PiPod</title>
+</head>
+<body>
+
+  <!--dummy data for now-->
+  <header>
+    <div class="playing" id="playing">Loading...</div>
+    <div class="artist" id="artist">&nbsp;</div>
+  </header>
+
+  <div class="art" id="art"></div>
+
+  <!--using unicode chars to keep the app lightweight-->
+  <div class="buttons">
+    <button id="prev" aria-label="prev">&#9664;</button>
+    <button id="play-pause" aria-label="play/pause">&#9658;</button>
+    <button id="next" aria-label="next">&#9654;</button>
+  </div>
+
+  <div class="playlist" id="playlist"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
