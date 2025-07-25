@@ -1,3 +1,6 @@
+const mopidy_url = `ws://192.168.0.102:6600/mopidy/ws`
+const statusDiv = document.getElementById("status");
+
 // Dummy data for playlist
 const playlist = [
   { title: "fein", artist: "bravis scott", albumArt: "https://placehold.co/400" },
@@ -14,6 +17,41 @@ const artist = document.getElementById("artist");
 const albumArt = document.getElementById("art");
 const playPauseBtn = document.getElementById("play-pause");
 const musicPlaylist = document.getElementById("playlist");
+
+const mopidyWs = new WebSocket(mopidy_url)
+
+mopidyWs.onopen = () => {
+  statusDiv.textContent = "connected to mopqidy";
+  console.log("mopdiy connected")
+}
+
+mopidyWs.onerror = (prob) => {
+      statusDiv.textContent = "couldnt connect to mpidy";
+      console.error(prob);
+};
+
+mopidyWs.onmessage = (event) => {
+  console.log(event.data)
+}
+
+mopidyWs.onclose = () => {
+  statusDiv.textContent = "disconnected"
+}
+
+function callMopidy(method, params = []) {
+  if (mopidyWs.readyState === WebSocket.OPEN) {
+    const request = {
+      jsonrpc: "2.0",
+      id: Date.now(),
+      method: method,
+      params: params
+    
+    };
+    mopidyWs.send(JSON.stringify(request));
+  } else {
+      statusDiv.textContent = "web socket not connected"
+  }
+}
 
 function showNowPlaying() {
   const track = playlist[currentInd];
