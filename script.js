@@ -1,4 +1,4 @@
-const mopidy_url = `ws://192.168.0.102:6600/mopidy/ws`
+const mopidy_url = `ws://192.168.0.102:6680/mopidy/ws`
 const statusDiv = document.getElementById("status");
 
 // Dummy data for playlist
@@ -27,7 +27,6 @@ mopidyWs.onopen = () => {
 
 mopidyWs.onerror = (prob) => {
       statusDiv.textContent = "couldnt connect to mpidy";
-      console.error(prob);
 };
 
 mopidyWs.onmessage = (event) => {
